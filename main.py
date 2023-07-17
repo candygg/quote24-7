@@ -70,8 +70,8 @@ def get_quote(message):
                 api = requests.get("https://api.quotable.io/quotes/random")
                 quote = api.json()
 
-                quotes = quote['content']
-                author = quote['author']
+                quotes = quote[0]['content']
+                author = quote[0]['author']
 
                 quote_message = f'*"{quotes}"*\n\n- {author} 💬'
                 bot.send_message(message.chat.id, quote_message, parse_mode="Markdown")
