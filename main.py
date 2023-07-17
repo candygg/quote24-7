@@ -2,8 +2,13 @@ import telebot
 import requests
 import random
 import os
+from dotenv import load_dotenv
 
-bot = telebot.TeleBot(os.environ['TELEGRAM_API_TOKEN'])
+# Load environment variables from .env file
+load_dotenv()
+
+# Create a Telegram Bot instance
+bot = telebot.TeleBot(os.getenv('TELEGRAM_API_TOKEN'))
 CHANNEL_ID = "@botcraftpython"
 
 
