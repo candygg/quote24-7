@@ -1,10 +1,11 @@
 import telebot
 import requests
 import random
+import os
 
-bot = telebot.TeleBot('5946141112:AAHQf3Ry0Z_Wjs0lPz2mXQj_HD-GRyiNRKs')
-
+bot = telebot.TeleBot(os.environ['TELEGRAM_API_TOKEN'])
 CHANNEL_ID = "@botcraftpython"
+
 
 def check_membership(user_id):
     try:
@@ -13,6 +14,7 @@ def check_membership(user_id):
     except telebot.apihelper.ApiException:
         return False
 
+
 @bot.message_handler(commands=['start'])
 def start(message):
     try:
@@ -20,18 +22,19 @@ def start(message):
             bot.send_photo(
                 message.chat.id,
                 "https://img.freepik.com/premium-vector/bot-sign-welcome-chatbot-online-consultation-support-service-vector-illustration_476325-701.jpg?w=2000",
-                caption="Hello, Welcome to the bot! Click on /help command to show all available commands. 😊",
-                parse_mode="Markdown"
-            )
+                caption=
+                "Hello, Welcome to the bot! Click on /help command to show all available commands. 😊",
+                parse_mode="Markdown")
         else:
             bot.send_photo(
                 message.chat.id,
                 "https://latium.org/storage/prod/kQ3d42JD/full/1000x",
-                caption="*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
-                parse_mode="Markdown"
-            )
+                caption=
+                "*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
+                parse_mode="Markdown")
     except Exception as e:
         print("An error occurred in the start command:", e)
+
 
 @bot.message_handler(commands=['help'])
 def help(message):
@@ -47,11 +50,12 @@ def help(message):
             bot.send_photo(
                 message.chat.id,
                 "https://latium.org/storage/prod/kQ3d42JD/full/1000x",
-                caption="*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
-                parse_mode="Markdown"
-            )
+                caption=
+                "*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
+                parse_mode="Markdown")
     except Exception as e:
         print("An error occurred in the help command:", e)
+
 
 @bot.message_handler(commands=['quote'])
 def get_quote(message):
@@ -61,8 +65,8 @@ def get_quote(message):
                 api = requests.get("https://api.quotable.io/quotes/random")
                 quote = api.json()
 
-                quotes = quote[0]['content']
-                author = quote[0]['author']
+                quotes = quote['content']
+                author = quote['author']
 
                 quote_message = f'*"{quotes}"*\n\n- {author} 💬'
                 bot.send_message(message.chat.id, quote_message, parse_mode="Markdown")
@@ -70,17 +74,17 @@ def get_quote(message):
                 bot.send_message(
                     message.chat.id,
                     "Apologies, there was an error fetching the quote. Please try again later. 😕",
-                    parse_mode="Markdown"
-                )
+                    parse_mode="Markdown")
         else:
             bot.send_photo(
                 message.chat.id,
                 "https://latium.org/storage/prod/kQ3d42JD/full/1000x",
-                caption="*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
-                parse_mode="Markdown"
-            )
+                caption=
+                "*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
+                parse_mode="Markdown")
     except Exception as e:
         print("An error occurred in the quote command:", e)
+
 
 @bot.message_handler(commands=['contact'])
 def contact_owner(message):
@@ -94,11 +98,12 @@ def contact_owner(message):
             bot.send_photo(
                 message.chat.id,
                 "https://latium.org/storage/prod/kQ3d42JD/full/1000x",
-                caption="*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
-                parse_mode="Markdown"
-            )
+                caption=
+                "*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
+                parse_mode="Markdown")
     except Exception as e:
         print("An error occurred in the contact command:", e)
+
 
 @bot.message_handler(func=lambda message: True)
 def invalid_message(message):
@@ -106,7 +111,7 @@ def invalid_message(message):
         if check_membership(message.from_user.id):
             responses = [
                 "Sorry, I can't understand. Please use the available commands or ask for help. 🤔",
-                "I'm sorry, I didn't get that.Q You can use the available commands or ask for assistance. 😅",
+                "I'm sorry, I didn't get that. You can use the available commands or ask for assistance. 😅",
                 "Apologies, I didn't catch that. Please use one of the provided commands or request help. 🙏"
             ]
             response = random.choice(responses)
@@ -115,18 +120,12 @@ def invalid_message(message):
             bot.send_photo(
                 message.chat.id,
                 "https://latium.org/storage/prod/kQ3d42JD/full/1000x",
-                caption="*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
-                parse_mode="Markdown"
-            )
+                caption=
+                "*⛔️ Access Denied ⛔️*\n\nYou are not joined our channel ❗️\n\nIf you want to use me,\n\nJoin our channel [@BotCraftPython](https://t.me/BotCraftPython) 👥",
+                parse_mode="Markdown")
     except Exception as e:
         print("An error occurred in the invalid_message function:", e)
 
-# Set the available commands for the bot
-bot.set_my_commands([
-    telebot.types.BotCommand("/start", "Restart the bot."),
-    telebot.types.BotCommand("/help", "Show available commands."),
-    telebot.types.BotCommand("/quote", "Get a random quote."),
-    telebot.types.BotCommand("/contact", "Contact the bot owner.")
-])
 
-bot.polling()
+if __name__ == '__main__':
+    bot.polling()
