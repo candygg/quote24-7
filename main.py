@@ -131,6 +131,13 @@ def invalid_message(message):
     except Exception as e:
         print("An error occurred in the invalid_message function:", e)
 
+bot.set_my_commands([
+    telebot.types.BotCommand("/start", "Restart the bot."),
+    telebot.types.BotCommand("/help", "Show available commands."),
+    telebot.types.BotCommand("/quote", "Get a random quote."),
+    telebot.types.BotCommand("/contact", "Contact the bot owner.")
+])
+
 
 if __name__ == '__main__':
     bot.polling()
