@@ -4,10 +4,11 @@ import random
 import os
 from dotenv import load_dotenv
 
-# Create a Telegram Bot instance
-bot = telebot.TeleBot('TELEGRAM_API_TOKEN')
-CHANNEL_ID = "@botcraftpython"
+# Load environment variables from .env file
+load_dotenv()
 
+# Create a Telegram Bot instance
+bot = telebot.TeleBot(os.getenv('TELEGRAM_API_TOKEN'))
 
 def check_membership(user_id):
     try:
