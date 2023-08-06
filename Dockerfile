@@ -15,3 +15,5 @@ COPY . .
 
 # Set the entry point for the container
 CMD ["python", "main.py"]
+
+Expose 3306
