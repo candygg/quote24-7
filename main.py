@@ -135,7 +135,7 @@ bot.set_my_commands([
     telebot.types.BotCommand("/quote", "Get a random quote."),
     telebot.types.BotCommand("/contact", "Contact the bot owner.")
 ])
-
+print("Bot is running ")
 
 if __name__ == '__main__':
     bot.polling()
